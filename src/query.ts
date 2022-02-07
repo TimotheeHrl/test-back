@@ -1,8 +1,6 @@
-import { Prisma } from "@prisma/client";
 import { objectType, nonNull, intArg, stringArg ,extendType,list} from "nexus"
 import { Context } from "./context";
 
-import {  Movie } from 'nexus-prisma'
 
 
 interface IgetUserFavorite {

@@ -1,8 +1,6 @@
 import {
   makeSchema,
-  objectType,
   asNexusMethod
-  
 } from 'nexus'
 import { DateTimeResolver, BigIntResolver } from 'graphql-scalars'
 import * as Query  from "./query";
