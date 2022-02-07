@@ -2,6 +2,13 @@
 ### Do not make changes to this file directly
 
 
+type AllUsersFavorite {
+  allUsersFavorite(
+    """User s id"""
+    userId: String!
+  ): [Favorite!]!
+}
+
 """
 The `BigInt` scalar type represents non-fractional signed whole numeric values.
 """
@@ -12,8 +19,16 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `dat
 """
 scalar DateTime
 
+type Favorite {
+  id: ID!
+  movie: Movie
+  movieId: Int!
+  userId: String!
+}
+
 type Movie {
   budget: Int!
+  favorites: [Favorite]
   id: Int!
   original_language: String!
   original_title: String!
@@ -27,13 +42,26 @@ type Movie {
 }
 
 type Mutation {
+  """User removes a favorite"""
+  RemoveFavorite(id: String!): Favorite
+  addFavarite(movieId: Int!, userId: String!): Favorite
+
+  """Creates a new Movie"""
+  createMovie(budget: Int!, original_language: String!, original_title: String!, overview: String!, popularity: Float!, poster_path: String!, release_date: String!, revenue: Int!, runtime: Int!, status: String!): Movie
   test: Boolean!
 }
 
 type Query {
   allMovies: [Movie!]!
-  movie(
+  allUsersFavorite(userId: String!): [Favorite!]!
+  singleMovie(
     """The id of the Movie"""
     id: Int!
   ): Movie
+}
+
+type User {
+  favoriteMovies: [Favorite]
+  id: ID!
+  name: String!
 }
